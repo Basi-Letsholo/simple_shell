@@ -1,12 +1,17 @@
 #include "main.h"
-
+/**
+ * token_count - counts no. of tokens
+ * @input: user input
+ * @delim: separator
+ * Return: count
+ */
 int token_count(char *input, char *delim)
 {
 	int count = 0;
 	char *token;
 
 	token = strtok(input, delim);
-	while(token != NULL)
+	while (token != NULL)
 	{
 		count++;
 		token = strtok(NULL, delim);
@@ -14,9 +19,15 @@ int token_count(char *input, char *delim)
 	return (count);
 }
 
+/**
+ * array - splits str to an array
+ * @input: user input
+ * @delim: str deliminator
+ * Return: array
+ */
 char **array(char *input, char *delim)
 {
-	int token_size, i =0;
+	int token_size, i = 0;
 	char *token, **arr = NULL;
 	char *input_cpy;
 
@@ -24,7 +35,7 @@ char **array(char *input, char *delim)
 	if (input_cpy == NULL)
 	{
 		perror("error");
-		return(NULL);
+		return (NULL);
 	}
 	strcpy(input_cpy, input);
 	token_size = token_count(input_cpy, delim);

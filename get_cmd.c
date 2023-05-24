@@ -1,10 +1,7 @@
 #include "main.h"
-
-
 /**
  * get_cmd - formats user input
  * @input: user input
- * @av: argv
  * Return: pointer to args
  */
 
@@ -29,7 +26,7 @@ char *get_cmd(char *input)
 				{
 					free(path);
 					free_arr(path_arr);
-					return(NULL);
+					return (NULL);
 				}
 				strcpy(file_path, path_arr[i]);
 				strcat(file_path, "/");
@@ -41,7 +38,7 @@ char *get_cmd(char *input)
 					free_arr(delim_arr);
 					return (file_path);
 				}
-				free(file_path);	
+				free(file_path);
 			}
 			free_arr(path_arr);
 		}

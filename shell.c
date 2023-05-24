@@ -33,7 +33,7 @@ int main(int ac, char **av, char **env)
 			continue;
 
 		cmd_arg = get_cmd(input);
-		if (cmd_arg == NULL) 
+		if (cmd_arg == NULL)
 		{
 			format = format_err(av, input, command_count, "not found");
 			_print(format);

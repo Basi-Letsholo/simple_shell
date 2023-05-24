@@ -3,6 +3,7 @@
  * exec_cmd - creates child process to execute command
  * @args: command arguments
  * @av: argv
+ * @cmd_arg: command args
  * Return: pid
  */
 
