@@ -88,6 +88,7 @@ char *get_input(int ac, char **av)
 		if (feof(stdin))
 		{
 			free(input);
+			printf("\n");
 			exit(0);
 		}
 		else
