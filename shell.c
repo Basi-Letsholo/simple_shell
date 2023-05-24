@@ -13,14 +13,12 @@ int main(int ac, char **av, char **env)
 	char *input = NULL, **args;
 	/*pid_t pid;*/
 	int command_count = 0;
-	/*extern char **environ;*/
 	struct stat st;
-
+	/*extern char **environ;*/
 	while (1)
 	{
 		input = get_input(ac, av);
 		command_count++;
-
 		if (strcmp(input, "env") == 0 || strcmp(input, "printenv") == 0)
 		{
 			for (i = 0; env[i] != NULL; i++)
@@ -33,10 +31,7 @@ int main(int ac, char **av, char **env)
 			}
 		}
 		if (strcmp(input, " ") == 0 || strcmp(input, "\n") == 0)
-		{
 			continue;
-		}
-
 		args = malloc(100 * sizeof(char *));
 		if (args == NULL)
 		{
@@ -44,15 +39,12 @@ int main(int ac, char **av, char **env)
 			exit(-1);
 		}
 		args = get_cmd(input, av);
-
 		if (stat(args[0], &st) != 0) /*checks if command exists, if not exits */
 		{
 			perror(av[0]);
 			continue;
 		}
-
 		exec_cmd(args, av);
-
 		free(args);
 		free(input);
 	}

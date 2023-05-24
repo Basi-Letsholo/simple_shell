@@ -18,14 +18,12 @@ char **get_cmd(char *input, char **av)
 		perror(av[0]);
 		exit(0);
 	}
-
 	while (token != NULL && i < 1000)
 	{
 		path[i] = strdup(token);
 		i++;
 		token = strtok(NULL, " ");
 	}
-
 	if (strncmp(path[0], "/bin/", strlen("/bin/")) != 0)
 	{
 		/*if input doesnt include path adds: /bin/ */
@@ -43,14 +41,10 @@ char **get_cmd(char *input, char **av)
 	if (args == NULL)
 	{
 		perror(av[0]);
-		exit(0);
-	}
+		exit(0); }
 	for (j = 0; j < i; j++)
-	{
-		args[j] = path[j];
-	}
+	{ args[j] = path[j]; }
 	args[j] = NULL;
-
 	free(buff);
 	free(path);
 	return (args);
