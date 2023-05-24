@@ -19,9 +19,9 @@ pid_t exec_cmd(char **args, char **av)
 		if (cmd == -1)
 		{
 			perror(av[0]);
-			exit(-1);
+			exit(0);
 		}
-		exit(-2);
+		exit(0);
 	}
 	else if (pid > 0)
 	{
@@ -30,7 +30,7 @@ pid_t exec_cmd(char **args, char **av)
 	else
 	{
 		perror(av[0]);
-		exit(-3);
+		exit(0);
 	}
 
 	return (pid);

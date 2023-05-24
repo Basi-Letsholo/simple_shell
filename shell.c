@@ -35,13 +35,13 @@ int main(int ac, char **av, char **env)
 		if (args == NULL)
 		{
 			perror(av[0]);
-			exit(-1);
+			exit(0);
 		}
 		args = get_cmd(input, av);
 		if (stat(args[0], &st) != 0) /*checks if command exists, if not exits */
 		{
-			format = format_err(av, input, command_count);
-			perror(format);
+			format = format_err(av, input, command_count, "not found");
+			_print(format);
 			continue;
 		}
 		exec_cmd(args, av);

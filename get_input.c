@@ -11,6 +11,23 @@ int _putchar(char c)
 }
 
 /**
+ * _print - prints str using _putchar
+ * @input: str to print
+ * Return: 0 on success
+ */
+int _print(char *input)
+{
+	int i;
+
+	for (i = 0; input[i] != '\0'; i++)
+	{
+		_putchar(input[i]);
+	}
+	_putchar('\n');
+	return (0);
+}
+
+/**
  * rem_extraspace - removes extraspace in commandline
  * @input: user input
  * Return: input w/o extra space
@@ -88,7 +105,7 @@ char *get_input(int ac, char **av)
 		if (feof(stdin))
 		{
 			free(input);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		else
 		{
@@ -102,7 +119,7 @@ char *get_input(int ac, char **av)
 	if (strcmp(input, "exit") == 0)
 	{
 		free(input);
-		exit(-1);
+		exit(EXIT_SUCCESS);
 	}
 
 	return (input);
