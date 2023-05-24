@@ -10,8 +10,7 @@
 int main(int ac, char **av, char **env)
 {
 	unsigned int i, j;
-	char *input = NULL, **args;
-	/*pid_t pid;*/
+	char *input = NULL, **args, *format;
 	int command_count = 0;
 	struct stat st;
 	/*extern char **environ;*/
@@ -41,7 +40,8 @@ int main(int ac, char **av, char **env)
 		args = get_cmd(input, av);
 		if (stat(args[0], &st) != 0) /*checks if command exists, if not exits */
 		{
-			perror(av[0]);
+			format = format_err(av, input, command_count);
+			perror(format);
 			continue;
 		}
 		exec_cmd(args, av);

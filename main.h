@@ -16,5 +16,6 @@ char *get_input(int ac, char **av);
 char **get_cmd(char *input, char **av);
 pid_t exec_cmd(char **args, char **av);
 int _putchar(char c);
+char *format_err(char **av, char *input, int count);
 
 #endif
