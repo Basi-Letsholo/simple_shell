@@ -105,6 +105,7 @@ char *get_input(int ac, char **av)
 		if (feof(stdin))
 		{
 			free(input);
+			printf("exiting..., \n");
 			exit(EXIT_SUCCESS);
 		}
 		else
