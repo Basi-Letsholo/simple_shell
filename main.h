@@ -13,10 +13,13 @@
 
 /* Function Prototypes */
 char *get_input(int ac, char **av);
-char **get_cmd(char *input, char **av);
-pid_t exec_cmd(char **args, char **av);
+char *get_cmd(char *input);
+pid_t exec_cmd(char **args, char *cmd_arg, char **av);
 int _putchar(char c);
 char *format_err(char **av, char *input, int count, char *err_msg);
 int _print(char *input);
+char **array(char *input, char *delim);
+int token_count(char *input, char *delim);
+void free_arr(char **arr);
 
 #endif

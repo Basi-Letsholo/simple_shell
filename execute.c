@@ -3,10 +3,11 @@
  * exec_cmd - creates child process to execute command
  * @args: command arguments
  * @av: argv
+ * @cmd_arg: command args
  * Return: pid
  */
 
-pid_t exec_cmd(char **args, char **av)
+pid_t exec_cmd(char **args, char *cmd_arg, char **av)
 {
 	pid_t pid;
 	int cmd;
@@ -15,7 +16,7 @@ pid_t exec_cmd(char **args, char **av)
 
 	if (pid == 0)
 	{
-		cmd = execve(args[0], args, NULL);
+		cmd = execve(cmd_arg, args, NULL);
 		if (cmd == -1)
 		{
 			perror(av[0]);

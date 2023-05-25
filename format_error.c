@@ -1,9 +1,10 @@
 #include "main.h"
 /**
- * format_err - fomrats error message
+ * format_err - formats error message
  * @av: argv[]
  * @input: input cmd
  * @count: shell command count
+ * @err_msg: error message
  * Return: format
  */
 

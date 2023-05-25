@@ -10,13 +10,13 @@
 int main(int ac, char **av, char **env)
 {
 	unsigned int i, j;
-	char *input = NULL, **args, *format;
+	char *input = NULL, **args, *format = NULL, *cmd_arg;
 	int command_count = 0;
-	struct stat st;
 	/*extern char **environ;*/
 	while (1)
 	{
 		input = get_input(ac, av);
+		args = array(input, " \n");
 		command_count++;
 		if (strcmp(input, "env") == 0 || strcmp(input, "printenv") == 0)
 		{
@@ -31,22 +31,19 @@ int main(int ac, char **av, char **env)
 		}
 		if (strcmp(input, " ") == 0 || strcmp(input, "\n") == 0)
 			continue;
-		args = malloc(100 * sizeof(char *));
-		if (args == NULL)
-		{
-			perror(av[0]);
-			exit(0);
-		}
-		args = get_cmd(input, av);
-		if (stat(args[0], &st) != 0) /*checks if command exists, if not exits */
+
+		cmd_arg = get_cmd(input);
+		if (cmd_arg == NULL)
 		{
 			format = format_err(av, input, command_count, "not found");
 			_print(format);
 			continue;
 		}
-		exec_cmd(args, av);
-		free(args);
+		exec_cmd(args, cmd_arg, av);
+		free(cmd_arg);
+		free_arr(args);
 		free(input);
+		free(format);
 	}
 	return (0);
 }

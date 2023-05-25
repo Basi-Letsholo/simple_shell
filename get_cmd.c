@@ -2,50 +2,53 @@
 /**
  * get_cmd - formats user input
  * @input: user input
- * @av: argv
  * Return: pointer to args
  */
 
-char **get_cmd(char *input, char **av)
+char *get_cmd(char *input)
 {
-	unsigned int i = 0, j;
-	char *token, *buff = NULL, **path = NULL, **args = NULL;
+	unsigned int i;
+	char *path, **delim_arr, *file_path;
+	char **path_arr = NULL, *delim_buff;
+	struct stat st;
 
-	token = strtok(input, " ");
-	path = malloc(1000 * sizeof(char *));
-	if (path == NULL)
+	delim_arr = array(input, " \n");
+	path = getenv("PATH");
+	if (path != NULL)
 	{
-		perror(av[0]);
-		exit(0);
-	}
-	while (token != NULL && i < 1000)
-	{
-		path[i] = strdup(token);
-		i++;
-		token = strtok(NULL, " ");
-	}
-	if (strncmp(path[0], "/bin/", strlen("/bin/")) != 0)
-	{
-		/*if input doesnt include path adds: /bin/ */
-		buff = malloc(strlen("/bin/") + strlen(path[0]) + 1);
-		if (buff == NULL)
+		path_arr = array(path, ":");
+		if (path_arr[0] != NULL)
 		{
-			perror(av[0]);
-			exit(0);
+			for (i = 0; path_arr[i] != NULL; i++)
+			{
+				file_path = malloc(sizeof(char) * (strlen(path_arr[i]) + strlen(delim_arr[0]) + 2));
+				if (file_path == NULL)
+				{
+					free(path);
+					free_arr(path_arr);
+					return (NULL);
+				}
+				strcpy(file_path, path_arr[i]);
+				strcat(file_path, "/");
+				strcat(file_path, delim_arr[0]);
+				strcat(file_path, "\0");
+				if (stat(file_path, &st) == 0) /*checks if command exists, if not exits */
+				{
+					free_arr(path_arr);
+					free_arr(delim_arr);
+					return (file_path);
+				}
+				free(file_path);
+			}
+			free_arr(path_arr);
 		}
-		strcpy(buff, "/bin/");
-		strcat(buff, path[0]);
-		path[0] = buff;
 	}
-	args = malloc((i + 1) * sizeof(char *));
-	if (args == NULL)
+	if (stat(delim_arr[0], &st) == 0) /*checks if command exists, if not exits */
 	{
-		perror(av[0]);
-		exit(0); }
-	for (j = 0; j < i; j++)
-	{ args[j] = path[j]; }
-	args[j] = NULL;
-	free(buff);
-	free(path);
-	return (args);
+		delim_buff = strdup(delim_arr[0]);
+		free_arr(delim_arr);
+		return (delim_buff);
+	}
+	free_arr(delim_arr);
+	return (NULL);
 }
