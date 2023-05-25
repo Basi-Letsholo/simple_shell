@@ -21,13 +21,13 @@ char *get_cmd(char *input)
 		{
 			for (i = 0; path_arr[i] != NULL; i++)
 			{
-				file_path = malloc(sizeof(char) * (strlen(path_arr[i]) + strlen(delim_arr[0]) + 2));
+				file_path = malloc(sizeof(char) * (strlen(path_arr[i])
+							+ strlen(delim_arr[0]) + 2));
 				if (file_path == NULL)
 				{
 					free(path);
 					free_arr(path_arr);
-					return (NULL);
-				}
+					return (NULL); }
 				strcpy(file_path, path_arr[i]);
 				strcat(file_path, "/");
 				strcat(file_path, delim_arr[0]);
@@ -36,19 +36,15 @@ char *get_cmd(char *input)
 				{
 					free_arr(path_arr);
 					free_arr(delim_arr);
-					return (file_path);
-				}
-				free(file_path);
-			}
-			free_arr(path_arr);
-		}
+					return (file_path); }
+				free(file_path); }
+			free_arr(path_arr); }
 	}
 	if (stat(delim_arr[0], &st) == 0) /*checks if command exists, if not exits */
 	{
 		delim_buff = strdup(delim_arr[0]);
 		free_arr(delim_arr);
-		return (delim_buff);
-	}
+		return (delim_buff); }
 	free_arr(delim_arr);
 	return (NULL);
 }
